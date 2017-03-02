@@ -1,0 +1,46 @@
+一、数据集划分
+
+训练集2：2014-11-18~2014-12-17(wy1_f*)         2014-12-18(wy_1_D)
+预测集： 2014-11-19~2014-12-18(wy2_pf*)         根据item子集表预测输出
+
+注:对数据集按小时维度划分，0~7凌晨dawn(1)，8~18白天am(2)，19~23晚上pm(3)
+
+二、特征工程
+
+1.用户相关特征 f1
+f1_t1 用户全部天数内view、favor、addcar、buy总量: user_totaldays_XXXX_total
+f1_t2 用户最近一周内view、favor、addcar、buy总量：user_last1week_XXXX_total
+f1_t3 用户近三天内  view、favor、addcar、buy总量：user_last3days_XXXX_total
+f1_t4_X 用户近三天  view、favor、addcar、buy的详细：user_last_X_day_XXXX_count 		        --三张表
+f1_t5 用户全部天数内凌晨、白天、晚上活跃次数 : user_totaldays_XX_total
+f1_t6 用户最近一周内凌晨、白天、晚上活跃次数 ：user_last1week_XX_total
+f1_t7 用户最近三天内凌晨、白天、晚上活跃次数 ：user_last3days_XX_total  
+f1_t8_X 用户近三天每天活跃多少小时：user_last_X_day_totalhour  						 		--三张表
+f1_t9 用户最近一周天内凌晨、白天、晚上购买的数量/比例: user_last1week_XXXX_buy and rate
+f1_t9_E1 用户最近三天内凌晨、白天、晚上购买的数量/比例: user_last3days_XXXX_buy and rate
+f1_t10 用户上次购买距离预测日长： user_lastbuy_diffdays
+f1_t11 用户上次活跃距离预测日长：user_lastact_diffdays
+f1_t12 用户一周收藏、加购过的商品中发生购买的比值： user_last1week_XXXX(andbuy)_count and rate
+f1_t13 用户近三天内收藏、加购过的商品中发生购买的比值： user_last3days_XXXX(andbuy)_count and rate
+f1_t14 用户一个月内二次购买的商品数占购买总商品数量及比值： user_totaldays_rebuy_itemcount and rate
+
+2.商品相关特征 f2
+f2_t1 商品全部天数内view、favor、addcar、buy总量: item_totaldays_XXXX_total
+f2_t2 商品最近一周内view、favor、addcar、buy总量：item_last1week_XXXX_total
+f2_t3 商品近三天内  view、favor、addcar、buy总量：item_last3days_XXXX_total
+f2_t4 商品近三天  view、favor、addcar、buy的详细：item_last_X_day_XXXX_count                --三张表
+f2_t5 商品全部天数内凌晨、白天、晚上活跃次数 : item_totaldays_XX_total
+f2_t6 商品最近一周被收藏、加购商品的人中最后发生购买数量及比例： item_last1week_XXXX(andbuy)_count and rate
+f2_t7 购买商品的人发生二次购买的数量及比例：item_totaldays_rebuy_usercount and rate
+
+3.用户商品协同特征 f3
+f3_t1 用户商品对 全部天数内各种互动总量: user_item_totaldays_XXXX_total
+f3_t2 用户商品对 最近一周内各种互动总量: user_item_last1week_XXXX_total
+f3_t3 用户商品对 最近三天内各种互动总量: user_item_last3days_XXXX_total
+f3_t4 用户商品对 近三天 各种互动详细: user_item_last_X_day_XXXX_count                       --三张表
+f3_t5 用户商品对 全部天数内凌晨、白天、晚上活跃次数 : item_totaldays_XX_total
+f3_t6 用户商品对 首次接触距离预测日时长： user_item_firstact_diffdays
+f3_t7 用户商品对 最后浏览距离预测日时长： user_item_recently_view_diffdays
+f3_t8 用户商品对 最后收藏距离预测日时长： user_item_recently_favor_diffdays
+f3_t9 用户商品对 最后加购距离预测日时长： user_item_recently_addcar_diffdays
+f3_t10 用户商品对 最后购买距离预测日时长： user_item_recently_buy_diffdays
